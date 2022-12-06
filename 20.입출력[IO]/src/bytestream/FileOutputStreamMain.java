@@ -1,5 +1,6 @@
 package bytestream;
 
+import java.io.File;
 import java.io.FileOutputStream;
 /*
  * <<출력스트림(OutputStream)사용방법>>
@@ -12,7 +13,7 @@ public class FileOutputStreamMain {
 
 	public static void main(String[] args)throws Exception {
 		
-		FileOutputStream fos=new FileOutputStream("fileOut.dat");
+		FileOutputStream fos=new FileOutputStream(new File("src/byteStream/fileOut.dat"),true);
 		/*
 		public abstract void write(int b)throws IOException;
 		 - Writes the specified byte to this output stream. 
