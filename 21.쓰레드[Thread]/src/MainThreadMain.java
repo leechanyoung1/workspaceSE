@@ -4,7 +4,7 @@
    - 메인쓰레드,AWT 쓰레드,사용자정의 쓰레드
    - 언제 만드냐--> 두가지일을 동시에 해야할때..
  
- 
+    
 - 쓰레드객체 만드는 방법(형식)
      
 
@@ -48,9 +48,11 @@ public class MainThreadMain {
 		Thread mainThread = Thread.currentThread();
 		System.out.println("main thread name:"+mainThread.getName());
 		System.out.println("main thread priority:"+mainThread.getPriority());
+		MainThreadCalled mainThreadCalled = new MainThreadCalled();
+		mainThreadCalled.main_thread_called_method();
 		System.out.println("main thread end");
 		return;
-
+		
 	}
 
 }
