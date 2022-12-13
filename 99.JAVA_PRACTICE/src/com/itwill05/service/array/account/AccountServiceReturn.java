@@ -1,4 +1,4 @@
-package com.itwill05.service.account;
+package com.itwill05.service.array.account;
 
 /*
  * 1.계좌객체들(Account[]) 을멤버변수로가진다.
@@ -33,24 +33,20 @@ public class AccountServiceReturn {
 		 * 	- 기존배열보다큰배열생성 
 		 * 	- 기존데이타 옮김
 		 */
-		Account[] newAccounts = new Account[accounts.length + 1];
-		for (int i = 0; i < accounts.length; i++) {
-			newAccounts[i] = accounts[i];
+		Account[] tempAccount=new Account[accounts.length+1];
+		
+		for(int i=0;i<accounts.length;i++) {
+			tempAccount[i]=accounts[i];
 		}
-		newAccounts[accounts.length] = newAccount;
-		this.accounts = newAccounts;
+		tempAccount[tempAccount.length-1]=newAccount;
+		accounts=tempAccount;
 	}
 	/*
 	 * 0.계좌데이타를 인자로받아서 Account[]에추가[OPTION]
 	 */
 	public void addAccount(int no, String owner, int balance, double iyul) {
-		Account newAccount = new Account(no, owner, balance, iyul);
-		/*
-		 * 1.배열크기증가 
-		 * 	- 기존배열보다큰배열생성 
-		 * 	- 기존데이타 옮김
-		 */
-		addAccount(newAccount);
+		Account newAccount=new Account(no, owner, balance, iyul);
+		this.addAccount(newAccount);
 	}
 	/*
 	 * 1.은행계좌들 총계좌수 반환메써드
@@ -73,25 +69,26 @@ public class AccountServiceReturn {
 	 * 3.은행계좌들 총잔고를 반환하는 메쏘드
 	 */
 	public int getAccountTotBalance() {
-		int totBalance =0;
+		int totBalance=0;
 		for (Account account : accounts) {
-			totBalance=+account.getBalance();
+			totBalance+=account.getBalance();
 		}
-	
 		return totBalance;
 	}
 
 	/*
 	 * 4.계좌번호를 인자로받아서 계좌객체주소 한개반환
 	 */
-	public Account findByNo(int no) {
-		Account finAccount = null;
+	public Account findByNo(int no){
+		Account finAccount=null;
+		
 		for (Account account : accounts) {
 			if(account.getNo()==no) {
-				finAccount=account;
+				finAccount = account;
 				break;
 			}
 		}
+		
 		return finAccount;
 	}
 
@@ -99,7 +96,7 @@ public class AccountServiceReturn {
 	 * 5.계좌잔고 인자로받아서 잔고이상인 계좌배열객체 참조변수반환
 	 */
 	public Account[] findByBalance(int balance) {
-		
+		Account[] findAccounts=null;
 		/*
 		 * A. 만족하는 객체의갯수구하기 - 예를들어 3개라면
 		 */
@@ -108,13 +105,12 @@ public class AccountServiceReturn {
 			if(account.getBalance()>=balance) {
 				count++;
 			}
-				
 		}
 		/*
 		 * B. Account객체배열생성 
 		 * 	- findAccounts=new Account[3];
 		 */
-		Account[] findAccounts = new Account[count];
+		findAccounts=new Account[count];
 		/*
 		 * C. 만족하는Account객체들 Account배열에담기
 		 */
@@ -131,24 +127,7 @@ public class AccountServiceReturn {
 	 * 6.계좌이율인자로받아서 인자이상인 계좌들배열객체 참조변수반환
 	 */
 	public Account[] findByIyul(double iyul) {
-		int count=0;
-		for (Account account : accounts) {
-			if(account.getIyul()>=iyul) {
-				count++;
-			}
-		}
-		Account[] findiyul = new Account[count];
-		
-		int index=0;
-		for (Account account : accounts) {
-			if(account.getIyul()>=iyul) {
-				findiyul[index] =account;
-				index++;
-			}
-		}
-		
-		
-		return findiyul;
+		return null;
 	}
 
 	/*
@@ -158,27 +137,17 @@ public class AccountServiceReturn {
 		/*
 		 * A. 만족하는 객체의갯수구하기 - 예를들어 3개라면
 		 */
-		int count=0;
-		for (Account account : accounts) {
-			if(account.getOwner()==name) {
-				count++;
-			}
-		}
+		
 		/*
 		 * B. Account객체배열생성 
 		 * 	- findAccounts=new Account[3];
 		 */
-		Account[] findAccounts=new Account[count];
+		
 		/*
 		 * C. 만족하는Account객체들 Account배열에담기
 		 */
-		int index=0;
-		for (Account account : accounts) {
-			if(account.getOwner()==name) {
-				findAccounts[index] = account;
-			}
-		}
-		return findAccounts;
+		
+		return null;
 	}
 
 	/*
@@ -192,7 +161,6 @@ public class AccountServiceReturn {
 		 */
 		Account findAccount=this.findByNo(no);
 		findAccount.deposit(m);
-		
 		return findAccount;
 
 	}
@@ -213,22 +181,24 @@ public class AccountServiceReturn {
 	public void sort(int standard, int order) {
 		if(standard==AccountServiceReturn.SORT_BY_BALANCE) {
 			if(order==AccountServiceReturn.SORT_ASC) {
-				for (int i = 0; i < accounts.length-1; i++) {
-					for (int j = 0; j < accounts.length-1; j++) {
-						if(accounts[j].getBalance()>accounts[j+1].getBalance()) {
-						Account temp = accounts[j];
-						accounts[j]=accounts[j+1];
-						accounts[j+1]=temp;
+				//오름차순
+				for(int i=0;i<accounts.length-1;i++) {
+					for(int j=0;j<accounts.length-1;j++) {
+						if(accounts[j].getBalance() > accounts[j+1].getBalance()) {
+							Account tempAccount = accounts[j];
+							accounts[j]=accounts[j+1];
+							accounts[j+1]=tempAccount;
 						}
 					}
 				}
-			}else if (order==AccountServiceReturn.SORT_DESC) {
-				for (int i = 0; i < accounts.length-1; i++) {
-					for (int j = 0; j < accounts.length-1; j++) {
-						if(accounts[j].getBalance()<accounts[j+1].getBalance()) {
-						Account temp = accounts[j];
-						accounts[j]=accounts[j+1];
-						accounts[j+1]=temp;
+			}else if(order==AccountServiceReturn.SORT_DESC) {
+				//내림차순
+				for(int i=0;i<accounts.length-1;i++) {
+					for(int j=0;j<accounts.length-1;j++) {
+						if(accounts[j].getBalance() < accounts[j+1].getBalance()) {
+							Account tempAccount = accounts[j];
+							accounts[j]=accounts[j+1];
+							accounts[j+1]=tempAccount;
 						}
 					}
 				}
@@ -240,9 +210,16 @@ public class AccountServiceReturn {
 	 * 12.계좌객체를 인자로 받아서 이름,잔고,이율 수정(update)[OPTION]
 	 */
 	public void updateAccount(Account updateAccount) {
-		for (int i = 0; i < accounts.length; i++) {
+		/****************case 1********************
+		Account account = this.findByNo(updateAccount.getNo());
+		account.setOwner(updateAccount.getOwner());
+		account.setBalance(updateAccount.getBalance());
+		account.setIyul(updateAccount.getIyul());
+		*/
+		/****************case 2********************/
+		for(int i=0;i<accounts.length;i++) {
 			if(accounts[i].getNo()==updateAccount.getNo()) {
-				accounts[i]=updateAccount;
+			   accounts[i]=updateAccount;
 				break;
 			}
 		}
@@ -252,26 +229,33 @@ public class AccountServiceReturn {
 	 * 13.번호,이름,잔고,이율 인자로받아서 계좌객체수정(update)[OPTION]
 	 */
 	public void updateAccount(int no, String owner, int balance, double iyul) {
-		/*****************case1***************
-		Account findAccount = this.findByNo(no);
+		/****************case1***********
+		Account findAccount=this.findByNo(no);
 		findAccount.setAccountData(no, owner, balance, iyul);
-		********************************/
-		Account updateAccount = new Account(no,owner,balance,iyul);
+		*/
+		Account updateAccount=new Account(no, owner, balance, iyul);
 		this.updateAccount(updateAccount);
 	}
-	
-		
 	/*
+	 << 과제아님 >>
 	 * 14.계좌번호 인자로받아서 삭제해줘[OPTION] 
 	 * 	A. 배열에서 Account객체삭제 
 	 * 	B. 배열사이즈감소
 	 *  C. 삭제한계좌객체반환
 	 *  
 	 */
-	
 	public Account deleteByNo(int no) {
-		
 		return null;
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+

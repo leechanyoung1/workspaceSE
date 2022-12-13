@@ -28,61 +28,21 @@ public class AcademyMemberService {
 	/*
 	 * 1.AcademyMember 전체출력
 	 */
-	public void print() {
-		for (int i = 0; i < members.length; i++) {
-			members[i].print();
-		}
-	}
 
 	/*
 	 * 2-1.번호 1 번 AcademyMember 객체 참조변수반환해줘
 	 * 
 	 */
-	public AcademyMember returnno() {
-		AcademyMember temp = null;
-		for (int i = 0; i < members.length; i++) {
-			if (members[i].getNo() == 1) {
-				temp = members[i];
-			}
-		}
-
-		return temp;
-	}
-
 	/*
 	 * 2-2.이름 KIM 인 AcademyMember 배열객체 참조변수반환해줘
 	 */
-	public AcademyMember[] nameReturn() {
-		int count=0;
-		AcademyMember[] temp = null;
-		int index=0;
-		for (int i = 0; i < members.length; i++) {
-			if(members[i].getName().equals("kim")); {
-				count++;
-			}
-		}
-		for (int i = 0; i < members.length; i++) {
-			if(members[i].getName().equals("kim")) {
-				temp[index] = members[i];
-				index++;
-			}
-		}
-		
-		
-		return temp;
-	}
-	
-	
-	
-	
-	
-	
-	
+
 	/*
 	 * 3.AcademyMember 중에서 AcademyStudent객체들 모두반환해줘 [ AcademyMember[] 객체주소반환 ]
 	 * 3.AcademyMember 중에서 AcademyStaff객체들 모두반환해줘 [ AcademyMember[] 객체주소반환 ]
 	 * 3.AcademyMember 중에서 AcademyGangsa객체들 모두반환해줘 [ AcademyMember[] 객체주소반환 ]
 	 */
+	
 
 	/*
 	 * 4.AcademyMember 중에서 자바반인   AcademyStudent 객체들 배열참조변수반환해줘 
