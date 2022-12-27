@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class AddressTableUpdateByPrimaryKeyMain {
+public class AddressTableDeleteByPrimaryKeyMain {
 
 	public static void main(String[] args) throws Exception {
 		/********************데이터베이스 접속정보**********************/
@@ -14,7 +14,8 @@ public class AddressTableUpdateByPrimaryKeyMain {
 		String user="scott";
 		String password="tiger";
 		/***************************************************************/
-		String selectSql ="update address set name='제임스',phone='333-3333',address='제주시 애월읍' where no=1";
+		String deleteSQL="delete address where no=11";
+		
 		/*
 		 1.Driver class loading
 	     2.Connection 객체생성
@@ -26,11 +27,12 @@ public class AddressTableUpdateByPrimaryKeyMain {
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
-		int rowCount = stmt.executeUpdate(selectSql);
-		System.out.println(">>"+rowCount+"행 update");
-		
+		int rowCount =stmt.executeUpdate(deleteSQL);
+		System.out.println(">>"+rowCount+"행 delete");
 		stmt.close();
 		con.close();
+	
+		
 		
 	}
 
