@@ -29,8 +29,8 @@ public class MemberDao {
 				+newMember.getM_name()+"','"
 				+newMember.getM_address()+"','"
 				+newMember.getM_age()+"','"
-				+newMember.getM_married()+"','"
-				+newMember.getM_regdate()+"')";
+				+newMember.getM_married()+"',"
+				+newMember.getM_regdate()+")";
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt= con.createStatement();

@@ -49,7 +49,7 @@ public class AddressDao4 {
 		int rowCount = stmt.executeUpdate(selectSql);
 		//System.out.println(">>"+rowCount+"행 update");
 		stmt.close();
-		con.close();
+		
 		return rowCount;
 	}
 	
