@@ -1,3 +1,4 @@
+package ui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +9,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
+import java.awt.Cursor;
+import javax.swing.JTabbedPane;
 
 public class ShopMainFrame extends JFrame {
 
@@ -41,9 +44,6 @@ public class ShopMainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel globalNorthMenupanel = new JPanel();
-		globalNorthMenupanel.setBackground(new Color(255, 128, 0));
-		contentPane.add(globalNorthMenupanel, BorderLayout.NORTH);
 		
 		JPanel globalSouthMenupanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) globalSouthMenupanel.getLayout();
@@ -51,6 +51,7 @@ public class ShopMainFrame extends JFrame {
 		contentPane.add(globalSouthMenupanel, BorderLayout.SOUTH);
 		
 		JButton globalsearchbtnNewButton = new JButton("");
+		globalsearchbtnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		globalsearchbtnNewButton.setBorder(null);
 		globalsearchbtnNewButton.setOpaque(false);
 		globalsearchbtnNewButton.setBackground(new Color(255, 255, 255));
@@ -58,16 +59,30 @@ public class ShopMainFrame extends JFrame {
 		globalSouthMenupanel.add(globalsearchbtnNewButton);
 		
 		JButton globalHomebtnNewButton_1 = new JButton("");
+		globalHomebtnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		globalHomebtnNewButton_1.setOpaque(false);
 		globalHomebtnNewButton_1.setBorder(null);
 		globalHomebtnNewButton_1.setIcon(new ImageIcon("C:\\2022-11-JAVA-DEVELOPER\\공부파일\\01.JAVA_FUNDMENTAL\\image\\place.png"));
 		globalSouthMenupanel.add(globalHomebtnNewButton_1);
 		
 		JButton globalMemberbtnNewButton_2 = new JButton("");
+		globalMemberbtnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		globalMemberbtnNewButton_2.setBorder(null);
 		globalMemberbtnNewButton_2.setOpaque(false);
 		globalMemberbtnNewButton_2.setIcon(new ImageIcon("C:\\2022-11-JAVA-DEVELOPER\\공부파일\\01.JAVA_FUNDMENTAL\\image\\koreanfood.png"));
 		globalSouthMenupanel.add(globalMemberbtnNewButton_2);
+		
+		JTabbedPane shoptabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(shoptabbedPane, BorderLayout.CENTER);
+		
+		JTabbedPane producttabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shoptabbedPane.addTab("제품", null, producttabbedPane, null);
+		
+		JTabbedPane membertabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		shoptabbedPane.addTab("회원", null, membertabbedPane, null);
+		
+		memberJoinPanel memberJoinPanel_ = new memberJoinPanel();
+		membertabbedPane.addTab("가입", null, memberJoinPanel_, null);
 	}
 
 }
